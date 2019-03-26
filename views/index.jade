@@ -3,5 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  video( id="myVideo" width="400" height="300" autoplay="1" )
+  button( onclick="startVideo()") Start
+  br
+  video( id="local_video" autoplay style="width: 320px; height: 240px; border: 1px solid black;")
   script( src="/javascripts/client.js" type="text/javascript")
