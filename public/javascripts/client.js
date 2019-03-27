@@ -1,10 +1,35 @@
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || window.navigator.mozGetUserMedia;
 window.URL = window.URL || window.webkitURL;
 
+const deviceSelector = document.getElementById('deviceSelector');
 let localVideo = document.getElementById('local_video');
 let localStream = null;
+let constraints = {
+                    video: true,
+                    audio: false};
+
+navigator.mediaDevices.enumerateDevices()
+.then(function(devices) { // 成功時
+ devices.forEach(function(device) {
+  console.log(device);
+  const deviceID=device.deviceId;
+  if (device.kind === "videoinput") {
+    newChild = document.createElement('option');
+    newChild.textContent = device.label;
+    newChild.setAttribute('data-deviceID', deviceID);
+    deviceSelector.appendChild(newChild);
+  }
+ });
+})
+.catch(function(err) { // エラー発生時
+ console.error('enumerateDevide ERROR:', err);
+});
+
 function startVideo(){
-  navigator.getUserMedia({video: true, audio: false}, 
+  const num = deviceSelector.selectedIndex;
+  const deviceID = deviceSelector.options[num].getAttribute('data-deviceID');
+  constraints.video = {deviceId: {exact: deviceID}};
+  navigator.getUserMedia(constraints, 
     function(stream) { // for success case
       console.log(stream);
       localStream = stream;
