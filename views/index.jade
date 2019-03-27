@@ -4,6 +4,7 @@ block content
   h1= title
   p Welcome to #{title}
   button( onclick="startVideo()") Start
+  button( type="button" onclick="stopVideo();") Stop Video
   br
   video( id="local_video" autoplay style="width: 320px; height: 240px; border: 1px solid black;")
   script( src="/javascripts/client.js" type="text/javascript")
