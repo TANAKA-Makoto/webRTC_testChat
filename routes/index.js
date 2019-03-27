@@ -9,4 +9,8 @@ router.get('/', function(req, res, next) {
 router.get('/manual', function(req, res, next){
   res.render('manual', {title: 'Manual signal'});
 });
+/* GET auto signal page*/
+router.get('/auto', function(req, res, next){
+  res.render('autoConnect', {title: 'Auto signal'});
+});
 module.exports = router;
