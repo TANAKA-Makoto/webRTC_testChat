@@ -5,6 +5,10 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Self Camera' });
 });
+/* GET camera echo page. */
+router.get('/self', function(req, res, next) {
+  res.render('self', { title: 'Self Camera' });
+});
 /* GET manual signal page*/
 router.get('/manual', function(req, res, next){
   res.render('manual', {title: 'Manual signal'});
