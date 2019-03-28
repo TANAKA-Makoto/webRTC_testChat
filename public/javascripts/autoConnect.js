@@ -1,7 +1,5 @@
 /*jshint esversion: 6 */
   const deviceSelector = document.getElementById('deviceSelector');
-  const wsUrl = 'ws://192.168.0.28:9000/';
-  const ws = new WebSocket(wsUrl);
   let localVideo = document.getElementById('local_video');
   let remoteVideo = document.getElementById('remote_video');
   let localStream = null;
@@ -11,12 +9,6 @@
   let constraints = {
                     video: true,
                     audio: false};
-
-  // --- prefix -----
-  navigator.getUserMedia  = navigator.getUserMedia    || navigator.webkitGetUserMedia ||
-                            navigator.mozGetUserMedia || navigator.msGetUserMedia;
-  RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
-  RTCSessionDescription = window.RTCSessionDescription || window.webkitRTCSessionDescription || window.mozRTCSessionDescription;
 
   // ---------------------- media handling ----------------------- 
   navigator.mediaDevices.enumerateDevices()
