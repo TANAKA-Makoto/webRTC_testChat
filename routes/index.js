@@ -3,10 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  const child     = ['/self', '/manual', '/auto'];
+  const child     = ['/self', '/manual', '/auto', '/trickle'];
   const pageTitle = ['self camera echo',
                      'manual hand shake',
-                     'auto hand shake'];
+                     'auto hand shake',
+                     'trickle hand shake'];
   res.render('index', { title: 'webRTC test', child: child, pageTitle:pageTitle});
 });
 /* GET camera echo page. */
@@ -20,5 +21,9 @@ router.get('/manual', function(req, res, next){
 /* GET auto signal page*/
 router.get('/auto', function(req, res, next){
   res.render('autoConnect', {title: 'Auto signal'});
+});
+/* GET trickle signal page*/
+router.get('/trickle', function(req, res, next){
+  res.render('autoConnect', {title: 'Trickle ICE signal'});
 });
 module.exports = router;
