@@ -3,7 +3,10 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  button( onclick="startVideo()") Start
-  br
-  video( id="local_video" autoplay style="width: 320px; height: 240px; border: 1px solid black;")
-  script( src="/javascripts/client.js" type="text/javascript")
+  nav(id="links")
+    p
+      a(href="/self") self camera echo
+      br
+      a(href="/manual") manual hand shake
+      br
+      a(href="/auto") auto hand shake
