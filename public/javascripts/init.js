@@ -5,3 +5,6 @@ navigator.getUserMedia  = navigator.getUserMedia    || navigator.webkitGetUserMe
                           navigator.mozGetUserMedia || navigator.msGetUserMedia;
 RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
 RTCSessionDescription = window.RTCSessionDescription || window.webkitRTCSessionDescription || window.mozRTCSessionDescription;
+$("#local_div").resizable();
+$("#remote_div").resizable();
+ 
