@@ -12,8 +12,10 @@ block content
   button( type="button" onclick="connect();") Connect
   button( type="button" onclick="hangUp();") Hang Up
   div
-    video( id="local_video" autoplay style="width: 1240px; height: 960px; border: 1px solid black;")
-    video( id="remote_video" autoplay style="width: 1240px; height: 960px; border: 1px solid black;")
+    div(id="local_div" style="width: 1240px; height: 960px; border: 2px solid black;")
+      video( id="local_video" autoplay style="width: 100%; height: 100%;")
+    div(id="remote_div" style="width: 1240px; height: 960px; border: 2px solid black;")
+      video( id="remote_video" autoplay style="width: 100%; height: 100%;")
   p SDP to send
     br
     textarea(id="text_for_send_sdp" rows="5" cols="60" readonly="readonly") SDP to send
@@ -21,4 +23,5 @@ block content
     button( type="button" onclick="onSdpText();") Receive remote SDP
     br
     textarea(id="text_for_receive_sdp" rows="5" cols="60")
-  script( src="/javascripts/autoConnect.js" type="text/javascript")
+  include footer
+  include scripts

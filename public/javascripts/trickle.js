@@ -129,7 +129,23 @@ function startVideo(){
       let answer = new RTCSessionDescription(message);
       setAnswer(answer);
     }
+    else if (message.type === 'candidate') {
+      // --- got ICE candidate ---
+      console.log('Received ICE candidate ...');
+      let candidate = new RTCIceCandidate(message.ice);
+      console.log(candidate);
+      addIceCandidate(candidate);
+    }
   };
+  function addIceCandidate(candidate) {
+    if (peerConnection) {
+      peerConnection.addIceCandidate(candidate);
+    }
+    else {
+      console.error('PeerConnection not exist!');
+      return;
+    }
+  }
 
   // ----- hand signaling ----
   function onSdpText() {
@@ -189,17 +205,24 @@ function startVideo(){
         console.log(evt.candidate);
 
         // Trickle ICE の場合は、ICE candidateを相手に送る
+        sendIceCandidate(evt.candidate);
         // Vanilla ICE の場合には、何もしない
       } else {
         console.log('empty ice event');
 
         // Trickle ICE の場合は、何もしない
         // Vanilla ICE の場合には、ICE candidateを含んだSDPを相手に送る
-        sendSdp(peer.localDescription);
+        //sendSdp(peer.localDescription);
       }
     };
 
-    
+  function sendIceCandidate(candidate) {
+    console.log('---sending ICE candidate ---');
+    let obj = { type: 'candidate', ice: candidate };
+    let message = JSON.stringify(obj);
+    console.log('sending candidate=' + message);
+    ws.send(message);
+  }
     // -- add local stream --
     if (localStream) {
       console.log('Adding local stream...');
@@ -221,7 +244,8 @@ function startVideo(){
     }).then(function() {
       console.log('setLocalDescription() succsess in promise');
 
-      // -- Trickle ICE の場合は、初期SDPを相手に送る -- 
+      // -- Trickle ICE の場合は、初期SDPを相手に送る --
+      sendSdp(peerConnection.localDescription);
       // -- Vanilla ICE の場合には、まだSDPは送らない --
       //sendSdp(peerConnection.localDescription);
     }).catch(function(err) {
@@ -257,7 +281,8 @@ function startVideo(){
     }).then(function() {
       console.log('setLocalDescription() succsess in promise');
 
-      // -- Trickle ICE の場合は、初期SDPを相手に送る -- 
+      // -- Trickle ICE の場合は、初期SDPを相手に送る --
+      sendSdp(peerConnection.localDescription);　
       // -- Vanilla ICE の場合には、まだSDPは送らない --
       //sendSdp(peerConnection.localDescription);
     }).catch(function(err) {
