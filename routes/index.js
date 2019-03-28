@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'webRTC test' });
+  const child     = ['/self', '/manual', '/auto'];
+  const pageTitle = ['self camera echo',
+                     'manual hand shake',
+                     'auto hand shake'];
+  res.render('index', { title: 'webRTC test', child: child, pageTitle:pageTitle});
 });
 /* GET camera echo page. */
 router.get('/self', function(req, res, next) {

@@ -4,9 +4,7 @@ block content
   h1= title
   p Welcome to #{title}
   nav(id="links")
-    p
-      a(href="/self") self camera echo
-      br
-      a(href="/manual") manual hand shake
-      br
-      a(href="/auto") auto hand shake
+    ul
+    - for val, index in child
+        li: a(href="#{val}") #{pageTitle[index]}
+        br
