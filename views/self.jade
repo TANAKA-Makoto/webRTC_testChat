@@ -8,4 +8,8 @@ block content
   select( id="deviceSelector" name="camera")
   br
   video( id="local_video" autoplay style="width: 320px; height: 240px; border: 1px solid black;")
-  script( src="/javascripts/self.js" type="text/javascript")
+  include footer
+  if title == 'Self Camera'
+    script( src="/javascripts/self.js" type="text/javascript")
+  else
+    script( src="/javascripts/selfOrg.js" type="text/javascript")
