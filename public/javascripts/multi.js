@@ -185,19 +185,27 @@
     delete remoteVideos[id];
   }
   function createVideoElement(elementId) {
+    let div = document.createElement('div');
+    div.style.width = '240px';
+    div.style.height = '180px';
+    div.id = elementId+'_div';
+    div.style.border = 'solid black 1px';
+    div.style.margin = '2px';
+    div.style.display = 'inline-block';
+    container.appendChild(div);
     let video = document.createElement('video');
-    video.width = '240';
-    video.height = '180';
+    video.style.width = '100%';
+    video.style.height = '100%';
     video.id = elementId;
-    video.style.border = 'solid black 1px';
-    video.style.margin = '2px';
-    container.appendChild(video);
+    div.appendChild(video);
+    $('#'+elementId+'_div').resizable();
     return video;
   }
   function removeVideoElement(elementId) {
+    let div = document.getElementById(elementId+'_div');
     let video = document.getElementById(elementId);
-    _assert('removeVideoElement() video must exist', video);
-    container.removeChild(video);
+    _assert('removeVideoElement() div must exist', div);
+    container.removeChild(div);
     return video;
   }
   // ---------------------- media handling ----------------------- 
